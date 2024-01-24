@@ -46,6 +46,13 @@
 -- ALTER TABLE 変更したいテーブル名 ADD COLUMN 列の定義;
 --ALTER TABLE shohin ADD COLUMN shohin_mei_kana VARCHAR(100);
 
+-- リネームについて
+-- ◎テーブル名のリネーム
+-- ALTER TABLE 旧テーブル名 RENAME TO 新テーブル名;++
+
+-- ◎カラム名のリネーム
+-- ALTER TABLE テーブル名 RENAME 旧カラム名 TO 新カラム名;
+
 CREATE TABLE shohin(
 --列定義
 shohin_id char(4) NOT null
