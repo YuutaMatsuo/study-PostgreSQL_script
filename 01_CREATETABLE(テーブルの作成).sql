@@ -55,13 +55,13 @@
 
 CREATE TABLE shohin(
 --列定義
-shohin_id char(4) NOT null
-,shohin_mei varchar(100) NOT null
-,shohin_bunrui varchar(32) NOT NULL
-,hanbai_tanka INTEGER
-,shiire_tanka INTEGER
-,torokubi date
-,PRIMARY KEY (shohin_id));
+shohin_id char(4) NOT NULL
+, shohin_mei varchar(100) NOT NULL
+, shohin_bunrui varchar(32) NOT NULL
+, hanbai_tanka INTEGER
+, shiire_tanka INTEGER
+, torokubi date
+, PRIMARY KEY (shohin_id));
 -- 主キーについては、複数記入することで複合キーとして指定できる
 
 DROP TABLE shohin;
