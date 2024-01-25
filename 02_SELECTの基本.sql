@@ -180,10 +180,124 @@ shohin;
 SELECT 
  1 = 1 --左辺と右辺が同じ
  ,1 <> 2　--左辺と右辺が異なる
+ ,2 > 1 --左辺が右辺よりも大きい
+ ,2 >= 1 --左辺が右辺以上
+ ,2 < 1 --左辺が右辺よりも小さい
+ ,2 <= 1 --左辺が右辺以下
+ ;
+
+ 
+-- ■販売単価が1000円以上の商品を取得する
+ SELECT 
+ shohin_id 
+ ,shohin_mei 
+ ,hanbai_tanka 
+ FROM
+ shohin
+ WHERE
+ hanbai_tanka >= 1000;
+
+
+-- ■販売単価が1000円未満の「商品ID」「商品名」「販売単価」
+ SELECT 
+ shohin_id AS "商品ID"
+ ,shohin_mei AS "商品名"
+ ,hanbai_tanka AS "販売単価"
+ FROM
+ shohin
+ WHERE 
+ hanbai_tanka < 1000
  ;
 
 
-
-
-
-
+ --■登録日が2009-09-27より前の商品を取得する
+ SELECT
+ shohin_id AS "商品ID" 
+ ,shohin_mei AS "商品名" 
+ ,torokubi AS "登録日"
+ FROM 
+ shohin
+ WHERE 
+ torokubi < '2009-09-27' --日付はシングルクォーテーションで囲む
+ ;
+ 
+ --■登録日が「2009-09-27」以降の商品を取得する
+ SELECT
+ shohin_mei AS "商品名"
+ ,torokubi AS "登録日"
+ FROM 
+ shohin
+ WHERE 
+ torokubi >= '2009-09-27'
+ ;
+ 
+ --検索条件にnullが含まれている場合、除外されてしまう
+ --nullに比較演算子は使えない
+ SELECT 
+ *
+ FROM
+ shohin
+ WHERE
+ shiire_tanka > 500
+ ;
+ 
+ 
+ --NULL値との比較
+ -- ※NULL値には比較演算子が使えない！
+ -- IS NULL → NULLであればtrue
+ -- IS NOT NULL → NULL以外であればtrue
+ 
+ --■仕入単価がnullの商品を取得する
+ SELECT
+ shohin_id AS "商品ID"
+ ,shohin_mei AS "商品名"
+ ,shiire_tanka AS "仕入単価"
+ FROM shohin
+ WHERE 
+ shiire_tanka IS NULL
+ -- shiire_tanka = nullと書かない  --unknown(不明)
+ ;
+ 
+ --■仕入単価がnull以外の商品を取得する
+ SELECT 
+ shohin_id AS "商品ID"
+ ,shohin_mei AS "商品名"
+ ,shiire_tanka AS "仕入単価"
+ FROM shohin
+ WHERE 
+ shiire_tanka IS NOT NULL 
+ ;
+ 
+ --■SQLの真偽値型
+ -- 1 = 1 → true
+ -- 1 = 2 → false
+ -- 1 = null → unknown(不明)
+ 
+ --WHERE句でレコードを取得する条件
+ -- 条件式の比較結果がtrueのレコードを取得する
+ -- 条件式の比較結果がfalse,unknown（不明）のレコードを取得しない
+ 
+ --■比較演算子で比較できるもの
+ SELECT 
+ 2 > 1 --整数 → OK
+,2.0 > 1 --小数 → OK
+,'2024-01-24' < '2024-01-25' --日付 → OK
+,'a' > 'b'
+,'a' < 'b'
+,'ab' > 'ab'
+,'ab' < 'ab'
+ ;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
