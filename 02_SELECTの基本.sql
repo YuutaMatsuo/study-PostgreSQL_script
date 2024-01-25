@@ -340,11 +340,56 @@ WHERE
 shohin_bunrui = 'キッチン用品'
 OR 
 hanbai_tanka >= 1000
+OR --複数でもOK
+shiire_tanka >= 500
 ;
 
+--■ 商品分類「事務用品」かつ、登録日が「2009-09-11」または「2009-09-20」
+--SELECTするのは「商品ID」「商品名」「商品分類」「登録日」
 
+SELECT 
+shohin_id AS "商品ID"
+,shohin_mei AS "商品名"
+,shohin_bunrui AS "分類"
+,torokubi AS "登録日"
+FROM shohin 
+WHERE 
+shohin_bunrui = '事務用品'
+AND 
+(torokubi = '2009-09-11' OR torokubi = '2009-09-20')
+;
 
+-- この書き方だと意図しない結果が出力されてしまう
+SELECT 
+shohin_id AS "商品ID"
+,shohin_mei AS "商品名"
+,shohin_bunrui AS "分類"
+,torokubi AS "登録日"
+FROM shohin 
+WHERE 
+shohin_bunrui = '事務用品'
+AND -- AND演算子の方がOR演算子よりも優先される為
+torokubi = '2009-09-11' 
+OR
+torokubi = '2009-09-20'
+;
 
+-- ■（）で優先順位を変更できる
+
+-- ■NOT演算子
+SELECT 
+*
+FROM shohin 
+WHERE 
+--商品分類が「事務用品」以外のレコードを取得したい
+--shohin_bunrui = '事務用品'
+-- <>を使うパターン
+--shohin_bunrui <> '事務用品'
+-- NOTを使うパターン
+-- NOT shohin_bunrui = '事務用品'
+-- NOTは重ねることもできる（あまり使わない）
+NOT NOT shohin_bunrui = '事務用品'
+;
 
 
 
