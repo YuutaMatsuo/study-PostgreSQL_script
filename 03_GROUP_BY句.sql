@@ -72,10 +72,30 @@ GROUP BY
  ,torokubi
 ;
 
+--PosgreSQLでは実行できてしまうが、他のDBMSではエラーになるためこの記法は使わない
+SELECT
+shohin_bunrui AS "sb"
+FROM shohin
+GROUP BY 
+ sb --SELECT句で名づけた別名は、GROUP BY句では使わない(非推奨)
+; 
+
+
+--◆まとめ
+--■集約関数はSELECT句のみで書くことが出来る（現時点）のちに学習するHAVING句とORDER BY句でも書くことが出来る
+--■SELECT句で泥桁列の別名は、WHERE句やGROUP BY句では使用できない
+-- →例外的にPostgreSQLでは使用できる(非推奨)
 
 
 
-
+SELECT 
+shohin_mei
+,max(hanbai_tanka)
+FROM 
+shohin
+GROUP BY
+shohin_mei 
+;
 
 
 
