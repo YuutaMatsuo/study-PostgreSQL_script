@@ -82,14 +82,46 @@ shohin_bunrui ASC --第1ソートキーの値が重複する場合は…
 ;
 
 
--- ■
+-- ■句を書く順番
+--SELECT句
+--FROM句
+--WHERE句
+--GROUP BY句
+--HAVING句
+--ORDER BY句
 
+-- ■句を処理する順番
+--FROM句 --どのテーブルを見るか
+--WHERE句 --テーブルに対して絞込み
+--GROUP BY句 --グループ分け
+--HAVING句 --グループに対して絞込み
+--SELECT句 --どのカラムを表示するか
+--ORDER BY句 --並べ替え
 
+SELECT
+shohin_bunrui 
+,count(*) AS "データ数"
+FROM shohin
+GROUP BY 
+shohin_bunrui
+ORDER BY --SELECT句でつけた別名を使用することが可能！
+データ数 ASC --別名
+-- shohin_id --GROUP BY句で指定していない列は使用できない！
+;
 
-
-
-
-
+-- ■列番号を使った指定方法 (非推奨) ※テストには出ない
+SELECT
+count(shohin_id)
+,count(1)
+,count(2) 
+,count(3) 
+,count(4) 
+,count(5) 
+,count(6)
+,count(7)
+,count(8) 
+FROM shohin
+;
 
 
 
