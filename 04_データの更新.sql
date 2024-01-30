@@ -88,6 +88,75 @@ INSERT INTO shohinins
 );
 
 
+-- フォーク
+-- 列名と値のペアを省略すると、該当する列にNULLが登録される（NOT NULL制約の場合はNG）
+INSERT INTO shohinins 
+(shohin_id, shohin_mei, shohin_bunrui, hanbai_tanka, shiire_tanka, torokubi)
+VALUES
+('0006', 'フォーク','キッチン用品', 500, NULL, '2009-09-20');
+
+DELETE FROM shohinins 
+WHERE shohin_id = '006';
+
+
+-- ■DEFAULT制約
+--商品ID：0009
+-- ◆暗黙的な初期値の挿入方法：デフォルト制約の付いた列名と値を省略する
+INSERT INTO shohinins 
+(shohin_id, shohin_mei, shohin_bunrui , torokubi)
+VALUES
+('0009', 'マーカーペン', '事務用品', '2024-01-30')
+;
+
+
+--商品ID：0010
+INSERT INTO shohinins 
+(shohin_id 
+,shohin_mei 
+,shohin_bunrui 
+,hanbai_tanka 
+,shiire_tanka 
+,torokubi 
+)values( 
+'0010'
+,'メモ帳'
+,'事務用品'
+,NULL --デフォルト制約のついた列にNULLを登録してみると...？
+,320
+,'2024-01-24'
+);
+
+
+--商品ID：0011
+--◆明示的な初期値の挿入方法：デフォルトの付いた列に対して、値として「DEFAULT」と記載する
+INSERT INTO shohinins 
+(shohin_id 
+,shohin_mei 
+,shohin_bunrui 
+,hanbai_tanka 
+,shiire_tanka 
+,torokubi 
+)values( 
+'0011'
+,'シャープペン'
+,'事務用品'
+,DEFAULT --デフォルト制約の付いた列に「DEFAULT」を登録してみると…？
+,120 --もしデフォルト制約がついていない列に「DEFAULT」と記載をすると、NULLが登録される
+,'2024-01-24'
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
