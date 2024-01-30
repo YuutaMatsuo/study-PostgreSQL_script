@@ -145,13 +145,99 @@ INSERT INTO shohinins
 ,'2024-01-24'
 );
 
+-- ■データの登録
+-- INSERT SELECT文
+-- 他のテーブルからデータを取得して、またさらに別のテーブルへ登録する
+-- SELECT文を実行して得たデータを、INSERTで追加する
+
+-- ■Shohinテーブルから全レコードを取得してShohinCopyテーブルに登録したい！
+-- <条件>
+-- INSERT句の列名とSELECT句の列名の順序が対応していること
+-- INSERT句の列数とSELECT句の列数が同じであること
+-- INSERT句とSELECT句のそれぞれの列のデータ型が同じであること
+
+INSERT INTO shohincopy 
+-- 登録対象の列名
+(shohin_id
+,shohin_mei
+,shohin_bunrui
+,hanbai_tanka
+,shiire_tanka
+,torokubi 
+)-- VALUES(値リスト)は使わない！
+SELECT
+shohin_id
+,shohin_mei
+,shohin_bunrui
+,hanbai_tanka
+,shiire_tanka 
+,torokubi 
+FROM shohin ;
+
+
+-- ■shohinテーブルのレコードから「販売単価」を2倍にして登録する
+INSERT INTO shohincopy 
+(shohin_id
+,shohin_mei
+,shohin_bunrui
+,hanbai_tanka
+,shiire_tanka
+,torokubi 
+)
+SELECT
+shohin_id
+,shohin_mei
+,shohin_bunrui
+,hanbai_tanka *2 --元の2倍の値となる
+,shiire_tanka 
+,torokubi 
+FROM shohin ;
 
 
 
+--■shohinテーブルから「販売単価が1000円以上」のレコードのみを登録
+INSERT INTO shohincopy 
+(shohin_id
+,shohin_mei
+,shohin_bunrui
+,hanbai_tanka
+,shiire_tanka
+,torokubi 
+)
+SELECT
+shohin_id
+,shohin_mei
+,shohin_bunrui
+,hanbai_tanka
+,shiire_tanka 
+,torokubi 
+FROM shohin ;
+WHERE
+hanbai_tanka >= 1000
+;
 
 
+-- ■複数のレコードを1文だけで登録する
+-- 1文で2件のレコードを登録する
+-- バルクインサート（一括登録）
 
-
+INSERT INTO shohinins (
+shohin_id , shohin_mei , shohin_bunrui , hanbai_tanka , shiire_tanka , torokubi 
+) VALUES ( 
+'0012' --1件目のデータ
+,'クリップ'
+,'事務用品'
+,100
+,20
+,'2024-01-25'
+),( 
+'0013'
+,'スプーン'
+,'キッチン用品'
+,300
+,150
+,'2024-01-20'
+);
 
 
 
