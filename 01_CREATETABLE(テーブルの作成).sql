@@ -53,6 +53,10 @@
 -- ◎カラム名のリネーム
 -- ALTER TABLE テーブル名 RENAME 旧カラム名 TO 新カラム名;
 
+-- ◎列の削除
+-- ALTER TABLE テーブル名 DROP COLUMN 削除対象の列名;
+ALTER TABLE shohincopy  DROP COLUMN torokubi;
+
 CREATE TABLE shohin(
 --列定義
 shohin_id char(4) NOT NULL

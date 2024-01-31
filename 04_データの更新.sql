@@ -67,7 +67,8 @@ shiire_tanka = DEFAULT
 ;
 
 -- ■複数列を更新する その１
--- 
+-- カンマ区切りで更新内容を追記することが出来る
+-- ◎よく使われる記法
 UPDATE 
 shohinins 
 SET 
@@ -77,9 +78,21 @@ WHERE
 shohin_bunrui = '衣服'
 ;
 
+--★構文
+--UPDATE 更新対象のテーブル名
+--SET 更新内容①,更新内容② 複数OK！
+--WHERE 絞込み条件
 
 
-
+--■複数列を更新する その②
+UPDATE 
+shohinins 
+SET 
+-- （更新したいすべての列リスト） = （更新するすべての値リスト）
+(hanbai_tanka,shiire_tanka) = (hanbai_tanka*2,shiire_tanka/2)
+WHERE 
+shohin_bunrui = 'キッチン用品'
+;
 
 
 
