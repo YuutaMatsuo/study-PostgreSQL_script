@@ -29,7 +29,7 @@ coffee_id char(4) NOT NULL
 
 
 -- ■問題(データの登録)
-INSERT INTO menu values( '0004', 'コールドブリュー', 'ice', 407, 150, '2015/11/20');
+(⑨ ア.INSERT INTO) menu (⑩　エ.VALUES)( (⑪ カ.'0004'), 'コールドブリュー', 'ice', 407, 150, (⑫ ク.'2015/11/20'));
 
 
 -- ■問題 (nullとの比較)
