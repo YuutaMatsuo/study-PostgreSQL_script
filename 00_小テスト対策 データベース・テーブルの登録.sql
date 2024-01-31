@@ -41,6 +41,7 @@ INSERT INTO menu values( '0001', '抹茶フラペチーノ', 'frappuccino', 539,
 INSERT INTO menu values( '0002', 'キャラメルフラペチーノ', 'frappuccino', 539, 200, '2015/10/10');
 INSERT INTO menu values( '0003', 'アフォガードフラペチーノ', 'frappuccino', 627, 250, '2015/10/10');
 INSERT INTO menu values( '0004', 'コールドブリュー', 'ice', 407, 150, '2015/11/20');
+
 INSERT INTO menu values( '0005', 'キャラメルマキアート', 'ice', 473, 170, '2015/12/10');
 INSERT INTO menu values( '0006', 'チャイティーラテ', 'tealatte', 484, 180, '2015/10/10');
 
