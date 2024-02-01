@@ -62,16 +62,56 @@ hanbai_tanka >= 2097.5 --計算した平均単価以上のデータを絞込み
 ;
 
 -- スカラサブクエリを使うと…
-SELECT 
+SELECT
 *
 FROM 
 shohin 
 WHERE 
 hanbai_tanka >= (
+                    --ここが「スカラサブクエリ」として利用しているスカラクエリ
                     SELECT avg(hanbai_tanka) 
                     FROM shohin
                 )
 ;
+
+-- ■ スカラクエリ
+-- 検索結果が1つの値（1行1列）になるクエリ
+-- 必ず検索結果が1つの値
+
+-- スカラクエリが書ける場所
+-- 1つの値が書ける場所は、スカラクエリが書ける
+-- 定数や列名などが書ける場所
+SELECT
+ *
+ ,1000
+ ,(SELECT avg(hanbai_tanka)  FROM shohin) --単一の検索結果が「定数」代わりとなって列が表示される
+FROM 
+ shohin
+WHERE 
+hanbai_tanka >= (
+                    --スカラサブクエリ
+                    SELECT 
+                      avg(hanbai_tanka) 
+                    FROM 
+                     shohin
+)
+ ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
