@@ -48,7 +48,7 @@
 
 -- リネームについて
 -- ◎テーブル名のリネーム
--- ALTER TABLE 旧テーブル名 RENAME TO 新テーブル名;++
+-- ALTER TABLE 旧テーブル名 RENAME TO 新テーブル名;
 
 -- ◎カラム名のリネーム
 -- ALTER TABLE テーブル名 RENAME 旧カラム名 TO 新カラム名;
