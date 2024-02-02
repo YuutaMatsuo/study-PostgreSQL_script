@@ -143,19 +143,90 @@ SELECT
   samplestr s 
 ;
  
+-- ■日付（操作）関数
+
+-- ■現在日付
+SELECT current_date ;
+--SELECT CURRENT date() ; --エラー ()をつけることは出来ない
+-- PostgreSQLのサーバの現在日付を表示
+-- DBサーバはOS(Windows10)の現在日付を参照している
+
+SELECT 
+ *
+ ,current_date 
+FROM 
+ shohin s;
+ 
+-- ■現在時刻
+ SELECT current_time ;
+-- SELECT current_time(); --エラー
+ 
+-- ■現在日時
+ SELECT current_timestamp ;
+ SELECT now();  --現在日時を表示させる
+-- SELECT now; --()をつけないとエラーとなる
+ 
+-- ■日付要素の切り出し
+-- ■EXTRACT(切り出す要素 FROM 対象日付)
+--※ 「対象日付」は、DATE型の列名を指定することも可能
+ 
+ SELECT 
+  EXTRACT(YEAR FROM current_timestamp) -- 現在日付の「年」取得
+  ,EXTRACT (MONTH FROM current_timestamp) --現在日時の「月」取得
+  ,EXTRACT (DAY FROM current_timestamp) --現在日時の「日」取得
+  ,EXTRACT (HOUR FROM current_timestamp) --現在日時の「時」取得
+  ,EXTRACT (MINUTE FROM current_timestamp) --現在日時の「分」取得
+  ,EXTRACT (SECOND FROM current_timestamp) --現在日時の「秒」取得
+  ,EXTRACT (DOW FROM current_timestamp) -- 現在日時の「曜日」を取得
+ ;
+ 
+ SELECT
+ extract(YEAR FROM torokubi -- 年取得)
+ FROM 
+ shohin s; 
+ 
+ -- ■DATE_PART
+ SELECT
+  date_part('year', current_timestamp ); --年情報
+   
+-- ■変換関数(データ型)
+-- ■CAST(変換 前の値 as 変換するデータ型)
+  
+ SELECT 
+  CAST ('0001' AS INTEGER) --変換の値は、テーブルの列名でもOK!
+--  CAST ('abc' AS INTEGER) -- INTEGER型として変換できないのでエラー
+ ;
+  
+ SELECT 
+  cast(shohin_id AS INTEGER)
+ FROM
+  shohin s ;
+  
+-- ログの出力？
+-- SELECT * FROM pg_catalog.pg_cast;
  
  
+-- ■COALECE関数
+-- 与えられた引数のうち、NULLではない最初尾引数を返す
+  
+-- ■NULLを値へ変換する
+SELECT 
+ COALESCE (NULL,1)
+ ,COALESCE (NULL,'test','sample')
+ ,COALESCE (NULL,NULL,NULL)
+;
  
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
