@@ -1,10 +1,10 @@
---SQL ServerAPostgreSQL
---DDLFƒe[ƒuƒ‹ì¬
+--SQL Serverã€PostgreSQL
+--DDLï¼šãƒ†ãƒ¼ãƒ–ãƒ«ä½œæˆ
 CREATE TABLE SampleLike
 ( strcol VARCHAR(6) NOT NULL,
   PRIMARY KEY (strcol));
 
---DMLFƒf[ƒ^“o˜^
+--DMLï¼šãƒ‡ãƒ¼ã‚¿ç™»éŒ²
 BEGIN TRANSACTION;
 
 INSERT INTO SampleLike (strcol) VALUES ('abcddd');

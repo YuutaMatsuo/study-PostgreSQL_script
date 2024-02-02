@@ -215,10 +215,40 @@ SELECT
  ,COALESCE (NULL,'test','sample')
  ,COALESCE (NULL,NULL,NULL)
 ;
+
+-- nullを0に置き換える
+SELECT
+ shohin_mei 
+ ,hanbai_tanka 
+ ,shiire_tanka 
+ ,COALESCE (shiire_tanka,0) -- 引数に列を渡す事もできる
+FROM 
+ shohin s 
+;
  
+ SELECT
+  avg(shiire_tanka)  -- NULL値は処理しない、6件平均
+  ,avg(COALESCE(shiire_tanka ,0)) -- NULLを0に置換て処理する、全件平均
+  ,count(shiire_tanka) AS "nullを除いた件数"
+  ,count(shohin_id) AS "nullを含んだ件数"
+ FROM 
+  shohin
+ ;
  
-  
-  
+-- COALESCE関数を使うときの決まりs
+ 
+-- ■列の値がデータ型を統一する
+-- 異なるデータ型の値を同じ列に入れるとエラー
+ SELECT
+  shiire_tanka 
+  ,COALESCE (shiire_tanka, 0)
+  ,COALESCE (shiire_tanka, '0') -- INTEGER型に変換可能なのでOK
+--  ,COALESCE (shiire_tanka,'abc') -- INTEGER型に変換不可なのでNG
+  ,COALESCE (CAST(shiire_tanka AS text),'abc') -- クエリとしての列の型ごと変更(どちらかと言えば非推奨)
+ FROM 
+  shohin s 
+ ;
+ 
   
   
   
