@@ -75,12 +75,39 @@ FROM
  shohin s 
 ;
 
+-- ■CASE式はネストできる
+SELECT
+ CASE --外側のCASE式
+     
+  WHEN gender = '男'
+  THEN
+   CASE --内側のCASE式 
+    WHEN age >= 18
+    THEN '結婚できる'
+    ELSE '結婚できない'
+   END
+   
+  WHEN gender = '女'
+  THEN
+   CASE --内側のCASE式 
+    WHEN age >= 16
+    THEN '結婚できる'
+    ELSE '結婚できない'
+   END 
+   
+ END
+;
 
-
-
-
-
-
+--■WHEN句は複数の条件を書ける
+SELECT 
+ CASE 
+  WHEN gender = '男' AND age >= 18
+  THEN '結婚できる'
+  WHEN gender = '女' AND age >= 16
+  THEN '結婚できる'
+  ELSE '結婚できない'
+ END
+;
 
 
 
