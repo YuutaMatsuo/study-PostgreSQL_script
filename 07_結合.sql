@@ -114,13 +114,124 @@ WHERE
 ;
 
 
+----------------------------------------------------------------------------
+
+-- ■外部結合
+-- 「OUTER JOIN」と「ON」を使う(必要に応じて「LEFT」もしくは「RIGHT」も指定する)
+-- 基準テーブル(主役)のレコードはすべて検索結果に含まれる
+
+-- ■LEFT OUTER JOIN
+-- 左のテーブルが基準（主役）
+-- ■RIGHT OUTER JOIN
+-- 右のテーブルが基準（主役）
 
 
+-- ■shohinテーブルを基準テーブルとして、tenposhohinテーブルと
+--  「shohin_id」列を結合キーとして外部結合する
+
+SELECT 
+ *
+FROM 
+ shohin AS S LEFT OUTER JOIN tenposhohin AS TS
+ON
+ S.shohin_id = TS.shohin_id 
+;
 
 
+-- ■tenposhohinテーブルを基準テーブルとして、shohinテーブルと
+--  「shohin_id」列を結合キーとして外部結合する
+
+① --パターン１(あまり使わない書き方)
+SELECT 
+ *
+FROM 
+ shohin AS S RIGHT OUTER JOIN tenposhohin AS TS
+ON
+ S.shohin_id = TS.shohin_id 
+;
+
+② --パターン２（よく使う書き方）
+SELECT 
+ *
+FROM 
+ tenposhohin AS TS LEFT OUTER JOIN shohin AS S
+ON
+ S.shohin_id = TS.shohin_id 
+;
+
+③ --パターン３（さらによく使う書き方）
+SELECT 
+ *
+FROM 
+ tenposhohin AS TS LEFT JOIN shohin AS S --「OUTER」は省略可
+ON
+ S.shohin_id = TS.shohin_id 
+;
+
+-- ■複数のテーブルを外部結合する
+
+SELECT 
+ *
+FROM 
+ --Aテーブル LEFT JOIN Bテーブル LEFT JOIN Cテーブル
+ shohin AS S
+LEFT JOIN
+ tenposhohin AS TS
+ON 
+ S.shohin_id = TS.tenpo_id 
+LEFT JOIN
+ shohin AS S2
+ON 
+ S.shohin_id = S2.shohin_id 
+;
+
+-- ■サブクエリを使った結合
+SELECT 
+ *
+FROM 
+ --サブクエリ+テーブル
+ (SELECT 
+    *
+  FROM 
+   shohin
+  WHERE 
+   shohin_bunrui = 'キッチン用品'
+ )AS S --サブクエリに別名をつける
+ LEFT JOIN
+  tenposhohin AS TS
+ ON
+  TS.shohin_id = S.shohin_id
+ ORDER BY
+  TS.shohin_id 
+;
+
+--------------------------------------------------------------------------------------------
+-- ■実験
+
+SELECT 
+ TS.tenpo_mei 
+ ,count(S.shohin_id)
+FROM 
+ shohin AS S LEFT OUTER JOIN tenposhohin AS TS
+ON
+ S.shohin_id = TS.shohin_id 
+GROUP BY
+ TS.tenpo_mei
+ORDER BY 
+ TS.tenpo_mei 
+;
 
 
-
-
-
-
+SELECT 
+ S.shohin_id 
+ ,S.shohin_mei 
+ ,sum(COALESCE (ts.suryo,0))
+FROM 
+ shohin AS S LEFT OUTER JOIN tenposhohin AS TS
+ON
+ S.shohin_id = TS.shohin_id 
+GROUP BY
+ S.shohin_id 
+ORDER BY 
+ S.shohin_id 
+;
